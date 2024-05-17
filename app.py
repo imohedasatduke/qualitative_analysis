@@ -59,6 +59,7 @@ st.set_page_config(page_title="DOCX Comments Extractor", layout="wide")
 st.title('Extract Qualitative Coding from Microsoft Word Documents')
 st.markdown("""
     This application allows you to upload DOCX files and extracts the comments along with the author and referenced text. 
+    <p> 
     You can upload multiple DOCX files at once.
     Ensure your filename is formatted correctly: [Interviewee Name]_[Coder Name].docx
     -Interviewee Name: The name of the person interviewed in the document.
