@@ -60,10 +60,10 @@ st.title('Extract Qualitative Coding from Microsoft Word Documents')
 st.markdown("""
     This application allows you to upload DOCX files and extracts the comments along with the author and referenced text. 
     <p> 
-    You can upload multiple DOCX files at once.<br />
+    You can upload multiple DOCX files at once.<br>
     Ensure your filename is formatted correctly: [Interviewee Name]_[Coder Name].docx
     -Interviewee Name: The name of the person interviewed in the document.
-    -Coder Name: The name of the person who performed the qualitative coding/theme identification. </p>
+    -Coder Name: The name of the person who performed the qualitative coding/theme identification. <p>
 """)
 
 uploaded_files = st.file_uploader("Choose DOCX files", type="docx", accept_multiple_files=True)
