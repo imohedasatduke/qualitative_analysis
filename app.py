@@ -62,8 +62,9 @@ st.markdown("""
      
     You can upload multiple DOCX files at once.  
     Ensure your filename is formatted correctly: [Interviewee Name]_[Coder Name].docx  
-    -Interviewee Name: The name of the person interviewed in the document.  
-    -Coder Name: The name of the person who performed the qualitative coding/theme identification.
+    <li>Interviewee Name: The name of the person interviewed in the document.</li>
+    <li>Coder Name: The name of the person who performed the qualitative coding/theme identification.</li>
+    </ol>
 """)
 
 uploaded_files = st.file_uploader("Choose DOCX files", type="docx", accept_multiple_files=True)
