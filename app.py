@@ -61,10 +61,9 @@ st.markdown("""
     This application allows you to upload DOCX files and extracts the comments along with the author and referenced text. 
      
     You can upload multiple DOCX files at once.  
-    Ensure your filename is formatted correctly: [Interviewee Name]_[Coder Name].docx  
-    <li>Interviewee Name: The name of the person interviewed in the document.</li>
-    <li>Coder Name: The name of the person who performed the qualitative coding/theme identification.</li>
-    </ol>
+    <h1>Ensure your filename is formatted correctly: [Interviewee Name]_[Coder Name].docx</h1>
+    Interviewee Name: The name of the person interviewed in the document.
+    Coder Name: The name of the person who performed the qualitative coding/theme identification.
 """)
 
 uploaded_files = st.file_uploader("Choose DOCX files", type="docx", accept_multiple_files=True)
