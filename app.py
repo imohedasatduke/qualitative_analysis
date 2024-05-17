@@ -8,7 +8,6 @@ import streamlit as st
 if not os.path.exists("uploads"):
     os.makedirs("uploads")
 
-
 def get_document_comments(docxFileName):
     comments_dict = {}
     comments_of_dict = {}
@@ -40,7 +39,6 @@ def get_document_comments(docxFileName):
 
     return comments_dict, comments_of_dict
 
-
 def extract_comments_from_docx(docx_path):
     comments_data = []
     comments_dict, comments_of_dict = get_document_comments(docx_path)
@@ -56,26 +54,50 @@ def extract_comments_from_docx(docx_path):
 
     return comments_data
 
+# Main UI
+st.set_page_config(page_title="DOCX Comments Extractor", layout="wide")
+st.title('Extract Qualitative Coding from Microsoft Word Documents')
+st.markdown("""
+    This application allows you to upload DOCX files and extracts the comments along with the author and referenced text. 
+    You can upload multiple DOCX files at once.
+""")
 
-st.title('DOCX Comments Extractor')
 uploaded_files = st.file_uploader("Choose DOCX files", type="docx", accept_multiple_files=True)
 
 if uploaded_files:
     all_comments = []
-    for uploaded_file in uploaded_files:
+    progress_bar = st.progress(0)
+    for i, uploaded_file in enumerate(uploaded_files):
         file_path = os.path.join("uploads", uploaded_file.name)
         with open(file_path, "wb") as f:
             f.write(uploaded_file.getbuffer())
-
+        
         comments = extract_comments_from_docx(file_path)
         all_comments.extend(comments)
-
+        progress_bar.progress((i + 1) / len(uploaded_files))
+    
     if all_comments:
         df = pd.DataFrame(all_comments)
         df[['Interviewee', 'Coder']] = df['file_name'].str.split('_', n=1, expand=True)
         df['Coder'] = df['Coder'].str.replace('.docx', '', regex=False)
         df = df[['Interviewee', 'Coder', 'comment', 'author', 'referenced_text', 'file_name']]
-
+        
+        st.success("File processing complete!")
         st.write(df)
         csv = df.to_csv(index=False)
         st.download_button(label="Download CSV", data=csv, file_name='comments_summary.csv', mime='text/csv')
+
+# Additional Styling
+st.markdown(
+    """
+    <style>
+    .reportview-container {
+        background-color: #f0f2f6;
+    }
+    .sidebar .sidebar-content {
+        background-color: #f0f2f6;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
